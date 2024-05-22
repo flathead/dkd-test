@@ -1,0 +1,13 @@
+SELECT 
+    mt.name AS type_name,
+    COUNT(m.id) AS total_count,
+    COUNT(CASE WHEN m.discontinued = FALSE THEN 1 END) AS available_count,
+    COUNT(CASE WHEN m.discontinued = TRUE THEN 1 END) AS discontinued_count
+FROM 
+    moto_types mt
+LEFT JOIN 
+    moto_motorcycles m 
+ON 
+    mt.id = m.type_id
+GROUP BY 
+    mt.name;
